@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="sv">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>12 Days of Pubmas</title>
+  <title>12 dagars Pubmas</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,200..900&display=swap" rel="stylesheet">
@@ -99,7 +99,7 @@
 
   <main>
     <p class="kicker">STOCKHOLM</p>
-    <p class="days">12 DAYS OF</p>
+    <p class="days">12 DAGARS</p>
     <h1>PUBMAS</h1>
     <p class="month"><span class="day">26</span><span>D</span><span>E</span><span>C</span><span>E</span><span>M</span><span>B</span><span>E</span><span>R</span></p>
 
@@ -156,21 +156,21 @@
       <g fill="#ffffff" opacity=".5"><circle cx="52" cy="88" r="4"/><circle cx="153" cy="118" r="3.5"/>
         <circle cx="431" cy="113" r="4.5"/><circle cx="532" cy="80" r="4"/></g>
     </svg>
-    <p class="secret">12 PUBS</p>
+    <p class="secret">12 PUBAR</p>
 
-    <button class="button" id="rsvp-open" type="button" aria-expanded="false" aria-controls="rsvp">🍺 RSVP</button>
+    <button class="button" id="rsvp-open" type="button" aria-expanded="false" aria-controls="rsvp">🍺 OSA</button>
     <form class="rsvp" id="rsvp" hidden>
       <div class="step">
-        <label class="step-label" for="rsvp-name"><b>1</b>YOUR NAME</label>
+        <label class="step-label" for="rsvp-name"><b>1</b>DITT NAMN</label>
         <input type="text" id="rsvp-name" autocomplete="name" required maxlength="80">
       </div>
       <div class="step">
         <span class="step-label"><b>2</b>SWISH 150 KR</span>
-        <img src="swish.png" alt="Swish QR code">
-        <button class="copy" type="button" id="swish-copy">COPY NUMBER</button>
-        <label class="check"><input type="checkbox" required>I have Swished 150 kr</label>
+        <img src="swish.png" alt="QR-kod för Swish">
+        <button class="copy" type="button" id="swish-copy">KOPIERA NUMRET</button>
+        <label class="check"><input type="checkbox" required>Jag har swishat 150 kr</label>
       </div>
-      <button class="send" type="submit">I'M IN</button>
+      <button class="send" type="submit">JAG ÄR MED</button>
     </form>
     <p class="thanks" id="rsvp-thanks" hidden></p>
   </main>
@@ -178,7 +178,7 @@
   <script>
     document.getElementById('swish-copy').addEventListener('click', async (e) => {
       await navigator.clipboard.writeText('447581063859');
-      e.target.textContent = 'COPIED';
+      e.target.textContent = 'KOPIERAT';
     });
     // Google Form that stores RSVPs: its formResponse URL and the name question's entry id.
     const FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLScba7O_pehweLiYtHsmZ9s0qAdG2rct4E95bfv6r_qe7zubMA/formResponse';
@@ -206,8 +206,8 @@
       document.body.append(frame, post);
       post.submit();
       form.hidden = true;
-      thanks.innerHTML = '<span class="t-big">🎄 YOU’RE IN!</span><span class="t-name"></span>' +
-        '<span class="t-small">SEE YOU 26 DECEMBER · STOCKHOLM</span>';
+      thanks.innerHTML = '<span class="t-big">🎄 DU ÄR MED!</span><span class="t-name"></span>' +
+        '<span class="t-small">VI SES 26 DECEMBER · STOCKHOLM</span>';
       thanks.querySelector('.t-name').textContent = name;
       thanks.hidden = false;
       thanks.scrollIntoView({ behavior: 'smooth', block: 'center' });
