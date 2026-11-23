@@ -16,6 +16,7 @@
       --ink: #1d1d1d;    /* the pen */
     }
     * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
     html { background: var(--card); }
     body {
       margin: 0; color: var(--red); font-family: "Archivo", system-ui, sans-serif;
@@ -50,6 +51,25 @@
       border: 1.5px solid var(--red); padding: 1rem; color: var(--red); text-decoration: none;
       font-weight: 800; letter-spacing: .1em; }
     .button:hover { background: var(--red); color: var(--card); }
+    button.button { width: 100%; background: none; font: inherit; font-weight: 800; cursor: pointer; }
+
+    .rsvp { margin-top: 1rem; display: grid; gap: .6rem; }
+    .rsvp[hidden] { display: none; }
+    .rsvp label { font-size: .8rem; font-weight: 700; letter-spacing: .25em; }
+    .rsvp input { font: inherit; font-size: 1.1rem; padding: .9rem 1rem; border: 1.5px solid var(--red);
+      background: #ffffff55; color: var(--ink); border-radius: 0; width: 100%; }
+    .rsvp input:focus { outline: 2px solid var(--gold); outline-offset: 2px; }
+    .rsvp button { background: var(--red); color: var(--card); border: 0; padding: 1rem; font: inherit;
+      font-weight: 800; letter-spacing: .1em; cursor: pointer; }
+    .rsvp button:disabled { opacity: .6; }
+    .thanks { text-align: center; font-weight: 800; letter-spacing: .1em; margin-top: 1.5rem; font-size: 1.1rem; }
+
+    .pay { margin-top: 2.5rem; text-align: center; }
+    .pay h2 { margin: 0 0 1rem; }
+    .pay img { width: min(260px, 70vw); height: auto; display: block; margin: 0 auto; border-radius: 18px; }
+    .pay .num { font-weight: 900; font-size: 1.6rem; letter-spacing: .05em; margin: 1rem 0 .5rem; }
+    .pay button { background: none; border: 1.5px solid var(--red); color: var(--red); font: inherit; font-weight: 800;
+      letter-spacing: .1em; padding: .7rem 1.2rem; cursor: pointer; }
 
     /* snow */
     .snow { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
@@ -73,7 +93,7 @@
     <p class="kicker">STOCKHOLM</p>
     <p class="days">12 DAYS OF</p>
     <h1>PUBMAS</h1>
-    <p class="month"><span>D</span><span>E</span><span>C</span><span>E</span><span>M</span><span>B</span><span>E</span><span>R</span></p>
+    <p class="month"><span>26</span><span>D</span><span>E</span><span>C</span><span>E</span><span>M</span><span>B</span><span>E</span><span>R</span></p>
 
     <!-- line drawing: a snowy street of pubs, with the paper tree and its gold star -->
     <svg class="scene" viewBox="0 0 600 220" fill="none" stroke="#d1283a" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true">
@@ -128,13 +148,59 @@
       <g fill="#ffffff" opacity=".5"><circle cx="52" cy="88" r="4"/><circle cx="153" cy="118" r="3.5"/>
         <circle cx="431" cy="113" r="4.5"/><circle cx="532" cy="80" r="4"/></g>
     </svg>
-    <p class="secret">12 PUBS · ALL SECRET</p>
+    <p class="secret">12 PUBS</p>
 
-    <a class="button" href="#">🍺 RSVP</a>
+    <button class="button" id="rsvp-open" type="button" aria-expanded="false" aria-controls="rsvp">🍺 RSVP</button>
+    <form class="rsvp" id="rsvp" hidden>
+      <label for="rsvp-name">YOUR NAME</label>
+      <input id="rsvp-name" name="name" autocomplete="name" required maxlength="80">
+      <button type="submit">I'M IN</button>
+    </form>
+    <p class="thanks" id="rsvp-thanks" hidden></p>
 
+    <section class="pay">
+      <h2>PAY</h2>
+      <img src="swish.png" alt="Payment QR code">
+      <p class="num" id="swish-num">447581063859</p>
+      <button type="button" id="swish-copy">COPY NUMBER</button>
+    </section>
   </main>
 
   <script>
+    document.getElementById('swish-copy').addEventListener('click', async (e) => {
+      await navigator.clipboard.writeText(document.getElementById('swish-num').textContent);
+      e.target.textContent = 'COPIED';
+    });
+    // Google Form that stores RSVPs: its formResponse URL and the name question's entry id.
+    const FORM_URL = '';
+    const NAME_ENTRY = '';
+
+    const open = document.getElementById('rsvp-open');
+    if (!FORM_URL) open.hidden = true;
+    const form = document.getElementById('rsvp');
+    const thanks = document.getElementById('rsvp-thanks');
+    open.addEventListener('click', () => {
+      form.hidden = false; open.hidden = true; open.setAttribute('aria-expanded', 'true');
+      document.getElementById('rsvp-name').focus();
+    });
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = document.getElementById('rsvp-name').value.trim();
+      if (!name) return;
+      const send = form.querySelector('button');
+      send.disabled = true;
+      try {
+        if (!FORM_URL) throw new Error('no form');
+        await fetch(FORM_URL, { method: 'POST', mode: 'no-cors', body: new URLSearchParams({ [NAME_ENTRY]: name }) });
+        form.hidden = true;
+        thanks.textContent = `🎄 See you there, ${name}!`;
+      } catch {
+        thanks.textContent = 'Something went wrong. Try again in a moment.';
+        send.disabled = false;
+      }
+      thanks.hidden = false;
+    });
+
     const snow = document.querySelector('.snow');
     for (let i = 0; i < 40; i++) {
       const f = document.createElement('i');
