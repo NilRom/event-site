@@ -43,15 +43,8 @@
 
     h2 { font-size: .8rem; letter-spacing: .25em; font-weight: 700; margin: 2rem 0 .75rem; }
 
-    /* the twelve stops, as outlined boxes */
-    .stops { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: .6rem; }
-    .stops li { border: 1.5px solid var(--red); aspect-ratio: 1; padding: .5rem; display: flex; flex-direction: column;
-      justify-content: space-between; background: #ffffff1f; }
-    .stops .n { width: 2.1rem; height: 2.1rem; border-radius: 50%; background: var(--red); color: var(--card);
-      display: grid; place-items: center; font-weight: 800; font-size: 1rem; }
-    .stops li { position: relative; }
-    .stops .q { position: absolute; inset: 0; display: grid; place-items: center; font-weight: 900; font-size: 3rem; color: var(--red); opacity: .35; }
-    .note { font-size: .8rem; letter-spacing: .1em; margin: .75rem 0 0; text-align: center; }
+    .garland { display: block; width: 100%; height: auto; margin-top: 1rem; }
+    .secret { text-align: center; font-weight: 700; letter-spacing: .25em; font-size: .85rem; margin: .5rem 0 0; }
 
     .button { display: flex; justify-content: center; align-items: center; gap: .6rem; margin-top: 2rem;
       border: 1.5px solid var(--red); padding: 1rem; color: var(--red); text-decoration: none;
@@ -114,22 +107,28 @@
       <path d="M110 200 q10 -6 20 0 M230 197 q10 -6 20 0 M355 197 q10 -6 20 0 M465 196 q10 -6 20 0"/>
     </svg>
 
-    <h2>TWELVE PUBS · ALL SECRET</h2>
-    <ol class="stops">
-      <li><span class="n">1</span><span class="q">?</span></li>
-      <li><span class="n">2</span><span class="q">?</span></li>
-      <li><span class="n">3</span><span class="q">?</span></li>
-      <li><span class="n">4</span><span class="q">?</span></li>
-      <li><span class="n">5</span><span class="q">?</span></li>
-      <li><span class="n">6</span><span class="q">?</span></li>
-      <li><span class="n">7</span><span class="q">?</span></li>
-      <li><span class="n">8</span><span class="q">?</span></li>
-      <li><span class="n">9</span><span class="q">?</span></li>
-      <li><span class="n">10</span><span class="q">?</span></li>
-      <li><span class="n">11</span><span class="q">?</span></li>
-      <li><span class="n">12</span><span class="q">?</span></li>
-    </ol>
-    <p class="note">Each pub is revealed on the night.</p>
+    <svg class="garland" viewBox="0 0 600 170" aria-hidden="true">
+      <path d="M0 10 Q150 70 300 40 T600 10" fill="none" stroke="#1d1d1d" stroke-width="1.5"/>
+      <!-- strings -->
+      <g stroke="#1d1d1d" stroke-width="1.2">
+        <path d="M60 31 v40"/><path d="M160 49 v55"/><path d="M300 40 v58"/><path d="M440 38 v60"/><path d="M540 20 v45"/>
+      </g>
+      <!-- baubles: caps then balls -->
+      <g fill="#e9a62e"><rect x="54" y="67" width="12" height="7"/><rect x="154" y="100" width="12" height="7"/>
+        <rect x="292" y="94" width="16" height="8"/><rect x="434" y="94" width="12" height="7"/><rect x="534" y="61" width="12" height="7"/></g>
+      <circle cx="60" cy="96" r="22" fill="#d1283a"/>
+      <circle cx="160" cy="125" r="19" fill="#e9a62e"/>
+      <circle cx="300" cy="134" r="33" fill="#d1283a"/>
+      <circle cx="440" cy="122" r="25" fill="#e9a62e"/>
+      <circle cx="540" cy="88" r="21" fill="#d1283a"/>
+      <!-- beer glass in the big bauble -->
+      <path d="M286 116 h28 l-4 34 h-20 z" fill="#c9d4d8"/>
+      <path d="M289 122 h22 l-3 25 h-16 z" fill="#e9a62e"/>
+      <!-- shine -->
+      <g fill="#ffffff" opacity=".5"><circle cx="52" cy="88" r="4"/><circle cx="153" cy="118" r="3.5"/>
+        <circle cx="431" cy="113" r="4.5"/><circle cx="532" cy="80" r="4"/></g>
+    </svg>
+    <p class="secret">12 PUBS · ALL SECRET</p>
 
     <a class="button" href="#">🍺 RSVP</a>
 
