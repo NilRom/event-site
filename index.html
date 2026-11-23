@@ -187,17 +187,18 @@
       e.preventDefault();
       const name = document.getElementById('rsvp-name').value.trim();
       if (!name) return;
-      const send = form.querySelector('.send');
-      send.disabled = true;
-      try {
-        if (!FORM_URL) throw new Error('no form');
-        await fetch(FORM_URL, { method: 'POST', mode: 'no-cors', body: new URLSearchParams({ [NAME_ENTRY]: name }) });
-        form.hidden = true;
-        thanks.textContent = `🎄 See you there, ${name}!`;
-      } catch {
-        thanks.textContent = 'Something went wrong. Try again in a moment.';
-        send.disabled = false;
-      }
+      // Post through a hidden form into a hidden frame: a plain form post, which privacy blockers allow.
+      const frame = document.createElement('iframe');
+      frame.name = 'rsvp-target'; frame.hidden = true;
+      const post = document.createElement('form');
+      post.method = 'POST'; post.action = FORM_URL; post.target = 'rsvp-target'; post.hidden = true;
+      const field = document.createElement('input');
+      field.name = NAME_ENTRY; field.value = name;
+      post.appendChild(field);
+      document.body.append(frame, post);
+      post.submit();
+      form.hidden = true;
+      thanks.textContent = `🎄 See you there, ${name}!`;
       thanks.hidden = false;
     });
 
