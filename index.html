@@ -49,8 +49,9 @@
       justify-content: space-between; background: #ffffff1f; }
     .stops .n { width: 2.1rem; height: 2.1rem; border-radius: 50%; background: var(--red); color: var(--card);
       display: grid; place-items: center; font-weight: 800; font-size: 1rem; }
-    .stops .pub { color: var(--ink); font-weight: 700; font-size: 1rem; line-height: 1.1; }
-    .stops .time { font-size: .75rem; letter-spacing: .1em; }
+    .stops li { position: relative; }
+    .stops .q { position: absolute; inset: 0; display: grid; place-items: center; font-weight: 900; font-size: 3rem; color: var(--red); opacity: .35; }
+    .note { font-size: .8rem; letter-spacing: .1em; margin: .75rem 0 0; text-align: center; }
 
     .button { display: flex; justify-content: center; align-items: center; gap: .6rem; margin-top: 2rem;
       border: 1.5px solid var(--red); padding: 1rem; color: var(--red); text-decoration: none;
@@ -113,21 +114,22 @@
       <path d="M110 200 q10 -6 20 0 M230 197 q10 -6 20 0 M355 197 q10 -6 20 0 M465 196 q10 -6 20 0"/>
     </svg>
 
-    <h2>THE TWELVE PUBS</h2>
+    <h2>TWELVE PUBS · ALL SECRET</h2>
     <ol class="stops">
-      <li><span class="n">1</span><span class="pub">Pub one</span><span class="time">TIME</span></li>
-      <li><span class="n">2</span><span class="pub">Pub two</span><span class="time">TIME</span></li>
-      <li><span class="n">3</span><span class="pub">Pub three</span><span class="time">TIME</span></li>
-      <li><span class="n">4</span><span class="pub">Pub four</span><span class="time">TIME</span></li>
-      <li><span class="n">5</span><span class="pub">Pub five</span><span class="time">TIME</span></li>
-      <li><span class="n">6</span><span class="pub">Pub six</span><span class="time">TIME</span></li>
-      <li><span class="n">7</span><span class="pub">Pub seven</span><span class="time">TIME</span></li>
-      <li><span class="n">8</span><span class="pub">Pub eight</span><span class="time">TIME</span></li>
-      <li><span class="n">9</span><span class="pub">Pub nine</span><span class="time">TIME</span></li>
-      <li><span class="n">10</span><span class="pub">Pub ten</span><span class="time">TIME</span></li>
-      <li><span class="n">11</span><span class="pub">Pub eleven</span><span class="time">TIME</span></li>
-      <li><span class="n">12</span><span class="pub">Pub twelve</span><span class="time">TIME</span></li>
+      <li><span class="n">1</span><span class="q">?</span></li>
+      <li><span class="n">2</span><span class="q">?</span></li>
+      <li><span class="n">3</span><span class="q">?</span></li>
+      <li><span class="n">4</span><span class="q">?</span></li>
+      <li><span class="n">5</span><span class="q">?</span></li>
+      <li><span class="n">6</span><span class="q">?</span></li>
+      <li><span class="n">7</span><span class="q">?</span></li>
+      <li><span class="n">8</span><span class="q">?</span></li>
+      <li><span class="n">9</span><span class="q">?</span></li>
+      <li><span class="n">10</span><span class="q">?</span></li>
+      <li><span class="n">11</span><span class="q">?</span></li>
+      <li><span class="n">12</span><span class="q">?</span></li>
     </ol>
+    <p class="note">Each pub is revealed on the night.</p>
 
     <a class="button" href="#">🍺 RSVP</a>
 
