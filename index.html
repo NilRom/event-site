@@ -9,12 +9,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,200..900&family=Cormorant+Garamond:ital,wght@1,500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #15372a;     /* fir green */
+      --bg: #5c1220;     /* wine red */
       --fg: #f3ead8;     /* cream */
       --gold: #c9a45c;   /* muted gold */
-      --wine: #8e1f2f;   /* wine red */
+      --wine: #3d0b15;   /* dark wine */
       --paper: #efe4bf;  /* the paper tree */
-      --dark: #0d241b;   /* text on gold */
+      --dark: #2e0810;   /* text on gold */
       --line: #f3ead855; /* thin cream lines */
     }
     * { box-sizing: border-box; }
@@ -23,7 +23,7 @@
     body {
       margin: 0; color: var(--fg); font-family: "Archivo", system-ui, sans-serif;
       overflow-x: hidden;
-      background: radial-gradient(ellipse at 50% 0%, #1d4a38 0%, transparent 70%);
+      background: radial-gradient(ellipse at 50% 0%, #74192b 0%, transparent 70%);
     }
     main { max-width: 620px; margin: 0 auto; padding: 0 1.25rem 3rem; position: relative; z-index: 1; }
 
@@ -143,7 +143,7 @@
       <path d="M380 195 V110 L420 80 L460 110 V195"/>
       <rect x="400" y="160" width="24" height="35"/><rect x="392" y="122" width="56" height="20" fill="#c9a45c" fill-opacity=".35"/>
       <path d="M412 122 v20 M428 122 v20"/>
-      <circle cx="420" cy="100" r="7" fill="#8e1f2f" stroke="none"/>
+      <circle cx="420" cy="100" r="7" fill="#c9a45c" stroke="none"/>
       <!-- pub 4 -->
       <path d="M480 193 V118 h90 V193 M474 118 l51 -26 l51 26"/>
       <rect x="492" y="134" width="22" height="22" fill="#c9a45c" fill-opacity=".35"/><rect x="536" y="134" width="22" height="22" fill="#c9a45c" fill-opacity=".35"/>
@@ -166,13 +166,13 @@
       <!-- baubles: caps then balls -->
       <g fill="#c9a45c"><rect x="54" y="67" width="12" height="7"/><rect x="154" y="100" width="12" height="7"/>
         <rect x="292" y="94" width="16" height="8"/><rect x="434" y="94" width="12" height="7"/><rect x="534" y="61" width="12" height="7"/></g>
-      <circle cx="60" cy="96" r="22" fill="#8e1f2f"/>
+      <circle cx="60" cy="96" r="22" fill="#f3ead8"/>
       <circle cx="160" cy="125" r="19" fill="#c9a45c"/>
-      <circle cx="300" cy="134" r="33" fill="#8e1f2f"/>
+      <circle cx="300" cy="134" r="33" fill="#f3ead8"/>
       <circle cx="440" cy="122" r="25" fill="#c9a45c"/>
-      <circle cx="540" cy="88" r="21" fill="#8e1f2f"/>
+      <circle cx="540" cy="88" r="21" fill="#f3ead8"/>
       <!-- beer glass in the big bauble -->
-      <path d="M286 116 h28 l-4 34 h-20 z" fill="#f3ead8"/>
+      <path d="M286 116 h28 l-4 34 h-20 z" fill="#5c1220"/>
       <path d="M289 122 h22 l-3 25 h-16 z" fill="#c9a45c"/>
       <!-- shine -->
       <g fill="#ffffff" opacity=".35"><circle cx="52" cy="88" r="4"/><circle cx="153" cy="118" r="3.5"/>
@@ -237,7 +237,7 @@
         for (let i = 0; i < 80; i++) {
           const c = document.createElement('i');
           c.className = 'confetti';
-          c.style.cssText = `left:${Math.random() * 100}vw;background:${['#c9a45c', '#8e1f2f', '#f3ead8'][i % 3]};` +
+          c.style.cssText = `left:${Math.random() * 100}vw;background:${['#c9a45c', '#f3ead8', '#e6c98a'][i % 3]};` +
             `animation-delay:${Math.random() * .6}s;--dx:${(Math.random() - .5) * 200}px;--rot:${Math.random() * 720}deg`;
           document.body.appendChild(c);
           setTimeout(() => c.remove(), 3500);
