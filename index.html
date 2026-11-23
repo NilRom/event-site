@@ -48,34 +48,28 @@
     .garland { display: block; width: 100%; height: auto; margin-top: 1rem; }
     .secret { text-align: center; font-weight: 700; letter-spacing: .25em; font-size: .85rem; margin: .5rem 0 0; }
 
-    .button { display: flex; justify-content: center; align-items: center; gap: .6rem; margin-top: 2rem;
-      border: 1.5px solid var(--red); padding: 1rem; color: var(--red); text-decoration: none;
-      font-weight: 800; letter-spacing: .1em; }
-    .button:hover { background: var(--red); color: var(--card); }
-    button.button { width: 100%; background: none; font: inherit; font-weight: 800; cursor: pointer; }
+    .button { display: flex; justify-content: center; align-items: center; gap: .6rem; width: 100%; margin-top: 2rem;
+      border: 0; padding: 1.1rem; background: var(--red); color: var(--card); font: inherit; font-weight: 800;
+      font-size: 1.15rem; letter-spacing: .12em; cursor: pointer; box-shadow: 0 4px 0 #8f1626; }
+    .button:active { transform: translateY(2px); box-shadow: 0 2px 0 #8f1626; }
 
-    .rsvp { margin-top: 1rem; display: grid; gap: .6rem; }
-    .rsvp[hidden] { display: none; }
-    .rsvp label { font-size: .8rem; font-weight: 700; letter-spacing: .25em; }
-    .rsvp input { font: inherit; font-size: 1.1rem; padding: .9rem 1rem; border: 1.5px solid var(--red);
+    .rsvp { margin-top: 1rem; border: 1.5px solid var(--red); padding: 1.25rem 1rem; display: grid; gap: 1.5rem; }
+    .step { display: grid; gap: .6rem; }
+    .step-label { display: flex; align-items: center; gap: .6rem; font-size: .8rem; font-weight: 700; letter-spacing: .25em; }
+    .step-label b { width: 1.6rem; height: 1.6rem; border-radius: 50%; background: var(--red); color: var(--card);
+      display: grid; place-items: center; letter-spacing: 0; flex: none; }
+    .rsvp input[type=text] { font: inherit; font-size: 1.1rem; padding: .9rem 1rem; border: 1.5px solid var(--red);
       background: #ffffff55; color: var(--ink); border-radius: 0; width: 100%; }
     .rsvp input:focus { outline: 2px solid var(--gold); outline-offset: 2px; }
-    .rsvp button { background: var(--red); color: var(--card); border: 0; padding: 1rem; font: inherit;
-      font-weight: 800; letter-spacing: .1em; cursor: pointer; }
-    .rsvp button:disabled { opacity: .6; }
+    .rsvp img { width: min(240px, 66vw); height: auto; display: block; margin: .25rem auto 0; border-radius: 11%; }
+    .copy { justify-self: center; background: none; border: 1.5px solid var(--red); color: var(--red); font: inherit;
+      font-weight: 800; font-size: .85rem; letter-spacing: .1em; padding: .6rem 1rem; cursor: pointer; }
+    .check { display: flex; gap: .75rem; align-items: center; font-weight: 700; color: var(--ink); cursor: pointer; }
+    .check input { width: 1.5rem; height: 1.5rem; accent-color: var(--red); flex: none; }
+    .send { background: var(--red); color: var(--card); border: 0; padding: 1rem; font: inherit;
+      font-weight: 800; letter-spacing: .12em; cursor: pointer; }
+    .send:disabled { opacity: .6; }
     .thanks { text-align: center; font-weight: 800; letter-spacing: .1em; margin-top: 1.5rem; font-size: 1.1rem; }
-
-    .pay { margin-top: 1rem; text-align: center; border: 1.5px solid var(--red); }
-    .pay summary { list-style: none; cursor: pointer; padding: 1rem; font-weight: 800; letter-spacing: .1em;
-      display: flex; justify-content: center; gap: .6rem; }
-    .pay summary::-webkit-details-marker { display: none; }
-    .pay summary::after { content: "+"; }
-    .pay[open] summary::after { content: "−"; }
-    .pay-body { padding: 0 1rem 1.25rem; }
-    .pay img { width: min(260px, 70vw); height: auto; display: block; margin: 0 auto 1rem; border-radius: 11%; }
-    .pay .num { font-weight: 900; font-size: 1.6rem; letter-spacing: .05em; margin: 1rem 0 .5rem; }
-    .pay button { background: none; border: 1.5px solid var(--red); color: var(--red); font: inherit; font-weight: 800;
-      letter-spacing: .1em; padding: .7rem 1.2rem; cursor: pointer; }
 
     /* snow */
     .snow { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
@@ -158,19 +152,19 @@
 
     <button class="button" id="rsvp-open" type="button" aria-expanded="false" aria-controls="rsvp">🍺 RSVP</button>
     <form class="rsvp" id="rsvp" hidden>
-      <label for="rsvp-name">YOUR NAME</label>
-      <input id="rsvp-name" name="name" autocomplete="name" required maxlength="80">
-      <button type="submit">I'M IN</button>
+      <div class="step">
+        <label class="step-label" for="rsvp-name"><b>1</b>YOUR NAME</label>
+        <input type="text" id="rsvp-name" autocomplete="name" required maxlength="80">
+      </div>
+      <div class="step">
+        <span class="step-label"><b>2</b>SWISH 150 KR</span>
+        <img src="swish.png" alt="Swish QR code">
+        <button class="copy" type="button" id="swish-copy">COPY NUMBER</button>
+        <label class="check"><input type="checkbox" required>I have Swished 150 kr</label>
+      </div>
+      <button class="send" type="submit">I'M IN</button>
     </form>
     <p class="thanks" id="rsvp-thanks" hidden></p>
-
-    <details class="pay">
-      <summary>PAY</summary>
-      <div class="pay-body">
-        <img src="swish.png" alt="Payment QR code">
-        <button type="button" id="swish-copy">COPY NUMBER</button>
-      </div>
-    </details>
   </main>
 
   <script>
@@ -183,7 +177,6 @@
     const NAME_ENTRY = '';
 
     const open = document.getElementById('rsvp-open');
-    if (!FORM_URL) open.hidden = true;
     const form = document.getElementById('rsvp');
     const thanks = document.getElementById('rsvp-thanks');
     open.addEventListener('click', () => {
@@ -194,7 +187,7 @@
       e.preventDefault();
       const name = document.getElementById('rsvp-name').value.trim();
       if (!name) return;
-      const send = form.querySelector('button');
+      const send = form.querySelector('.send');
       send.disabled = true;
       try {
         if (!FORM_URL) throw new Error('no form');
