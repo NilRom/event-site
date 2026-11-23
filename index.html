@@ -69,7 +69,15 @@
     .send { background: var(--red); color: var(--card); border: 0; padding: 1rem; font: inherit;
       font-weight: 800; letter-spacing: .12em; cursor: pointer; }
     .send:disabled { opacity: .6; }
-    .thanks { text-align: center; font-weight: 800; letter-spacing: .1em; margin-top: 1.5rem; font-size: 1.1rem; }
+    .thanks { margin-top: 1rem; padding: 2rem 1rem; text-align: center; background: var(--red); color: var(--card);
+      animation: pop .5s cubic-bezier(.2, 1.6, .4, 1); }
+    .thanks .t-big { display: block; font-weight: 900; font-stretch: 112%; font-size: clamp(2.2rem, 10vw, 3.2rem); line-height: 1; }
+    .thanks .t-name { display: block; font-weight: 800; font-size: 1.4rem; margin-top: .5rem; }
+    .thanks .t-small { display: block; font-size: .8rem; font-weight: 700; letter-spacing: .25em; margin-top: 1rem; }
+    @keyframes pop { from { transform: scale(.6); opacity: 0; } }
+    .confetti { position: fixed; top: -12px; width: 10px; height: 14px; z-index: 5; pointer-events: none;
+      animation: drop 2.6s ease-in forwards; }
+    @keyframes drop { to { transform: translate(var(--dx), 110vh) rotate(var(--rot)); } }
 
     /* snow */
     .snow { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
@@ -198,8 +206,21 @@
       document.body.append(frame, post);
       post.submit();
       form.hidden = true;
-      thanks.textContent = `🎄 See you there, ${name}!`;
+      thanks.innerHTML = '<span class="t-big">🎄 YOU’RE IN!</span><span class="t-name"></span>' +
+        '<span class="t-small">SEE YOU 26 DECEMBER · STOCKHOLM</span>';
+      thanks.querySelector('.t-name').textContent = name;
       thanks.hidden = false;
+      thanks.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        for (let i = 0; i < 80; i++) {
+          const c = document.createElement('i');
+          c.className = 'confetti';
+          c.style.cssText = `left:${Math.random() * 100}vw;background:${['#d1283a', '#e9a62e', '#eee2a6'][i % 3]};` +
+            `animation-delay:${Math.random() * .6}s;--dx:${(Math.random() - .5) * 200}px;--rot:${Math.random() * 720}deg`;
+          document.body.appendChild(c);
+          setTimeout(() => c.remove(), 3500);
+        }
+      }
     });
 
     const snow = document.querySelector('.snow');
