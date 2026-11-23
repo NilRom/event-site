@@ -40,6 +40,7 @@
     .month { font-weight: 200; font-stretch: 125%; letter-spacing: .32em; font-size: clamp(1.4rem, 6.4vw, 2.4rem);
       margin: .5rem 0 0; display: flex; justify-content: space-between; }
 
+    .month .day { margin-right: .6em; }
     .scene { display: block; width: 100%; height: auto; margin: 1.5rem 0 .5rem; }
 
     h2 { font-size: .8rem; letter-spacing: .25em; font-weight: 700; margin: 2rem 0 .75rem; }
@@ -66,7 +67,7 @@
 
     .pay { margin-top: 2.5rem; text-align: center; }
     .pay h2 { margin: 0 0 1rem; }
-    .pay img { width: min(260px, 70vw); height: auto; display: block; margin: 0 auto; border-radius: 18px; }
+    .pay img { width: min(260px, 70vw); height: auto; display: block; margin: 0 auto 1rem; border-radius: 11%; }
     .pay .num { font-weight: 900; font-size: 1.6rem; letter-spacing: .05em; margin: 1rem 0 .5rem; }
     .pay button { background: none; border: 1.5px solid var(--red); color: var(--red); font: inherit; font-weight: 800;
       letter-spacing: .1em; padding: .7rem 1.2rem; cursor: pointer; }
@@ -93,7 +94,7 @@
     <p class="kicker">STOCKHOLM</p>
     <p class="days">12 DAYS OF</p>
     <h1>PUBMAS</h1>
-    <p class="month"><span>26</span><span>D</span><span>E</span><span>C</span><span>E</span><span>M</span><span>B</span><span>E</span><span>R</span></p>
+    <p class="month"><span class="day">26</span><span>D</span><span>E</span><span>C</span><span>E</span><span>M</span><span>B</span><span>E</span><span>R</span></p>
 
     <!-- line drawing: a snowy street of pubs, with the paper tree and its gold star -->
     <svg class="scene" viewBox="0 0 600 220" fill="none" stroke="#d1283a" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true">
@@ -161,14 +162,13 @@
     <section class="pay">
       <h2>PAY</h2>
       <img src="swish.png" alt="Payment QR code">
-      <p class="num" id="swish-num">447581063859</p>
       <button type="button" id="swish-copy">COPY NUMBER</button>
     </section>
   </main>
 
   <script>
     document.getElementById('swish-copy').addEventListener('click', async (e) => {
-      await navigator.clipboard.writeText(document.getElementById('swish-num').textContent);
+      await navigator.clipboard.writeText('447581063859');
       e.target.textContent = 'COPIED';
     });
     // Google Form that stores RSVPs: its formResponse URL and the name question's entry id.
