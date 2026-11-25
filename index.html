@@ -94,7 +94,8 @@
     .rsvp input[type=text] { font: inherit; font-size: 1.1rem; padding: .9rem 1rem; border: 1px solid var(--line);
       background: #ffffffb3; color: var(--ink); border-radius: 0; width: 100%; }
     .rsvp input:focus { outline: 2px solid var(--gold); outline-offset: 2px; }
-    .rsvp img { width: min(240px, 66vw); height: auto; display: block; margin: .25rem auto 0; border-radius: 11%; }
+    .rsvp img { width: min(240px, 66vw); height: auto; display: block; margin: .25rem auto 0; border-radius: 9% 0 0 9% / 7.8% 0 0 7.8%; filter: drop-shadow(0 8px 14px #34405e40); }
+    .step-note { margin: 0; color: var(--ink); font-size: .95rem; }
     .copy { justify-self: center; background: none; border: 1px solid var(--red); color: var(--red); font: inherit;
       font-weight: 700; font-size: .8rem; letter-spacing: .12em; padding: .6rem 1rem; cursor: pointer; }
     .check { display: flex; gap: .75rem; align-items: center; font-weight: 700; color: var(--ink); cursor: pointer; }
@@ -437,10 +438,11 @@
         <input type="text" id="rsvp-name" autocomplete="name" required maxlength="80">
       </div>
       <div class="step">
-        <span class="step-label"><b>2</b>SWISH 150 KR</span>
-        <img src="swish.png" alt="QR-kod för Swish">
+        <span class="step-label"><b>2</b>KUL ÖVERRASKNINGAR</span>
+        <p class="step-note">Swisha 150 kr om du vill ha kul överraskningar.</p>
+        <img src="swish.png?v=2" alt="QR-kod för Swish">
         <button class="copy" type="button" id="swish-copy">KOPIERA NUMRET</button>
-        <label class="check"><input type="checkbox" required>Jag har swishat 150 kr</label>
+        <label class="check"><input type="checkbox" id="rsvp-paid">Jag har swishat 150 kr</label>
       </div>
       <button class="send" type="submit">JAG ÄR MED</button>
     </form>
@@ -473,7 +475,7 @@
       const post = document.createElement('form');
       post.method = 'POST'; post.action = FORM_URL; post.target = 'rsvp-target'; post.hidden = true;
       const field = document.createElement('input');
-      field.name = NAME_ENTRY; field.value = name;
+      field.name = NAME_ENTRY; field.value = document.getElementById('rsvp-paid').checked ? `${name} (swishat)` : name;
       post.appendChild(field);
       document.body.append(frame, post);
       post.submit();
