@@ -34,10 +34,11 @@
       box-shadow: inset 0 0 0 5px #ffffff2e, inset 0 0 0 6px #4ea8de33, 0 18px 40px -24px #4ea8de66; }
 
     /* string lights */
-    .lights { display: flex; justify-content: space-around; padding: 0 .5rem; height: 2.4rem;
-      background: radial-gradient(ellipse at 50% -40%, transparent 62%, #34405e66 63%, #34405e66 66%, transparent 67%) 0 0 / 3.2rem 2rem repeat-x; }
-    .lights i { width: .6rem; height: .9rem; border-radius: 50% 50% 45% 45%; margin-top: .85rem;
+    .lights { display: flex; height: 2.7rem; overflow: hidden; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='51.2' height='32'%3E%3Cpath d='M0 2 Q25.6 27 51.2 2' fill='none' stroke='%2334405e' stroke-opacity='.5' stroke-width='1.5'/%3E%3Ccircle cx='0' cy='2.2' r='2.2' fill='%2334405e' fill-opacity='.55'/%3E%3Ccircle cx='51.2' cy='2.2' r='2.2' fill='%2334405e' fill-opacity='.55'/%3E%3C/svg%3E") 0 0 / 3.2rem 2rem repeat-x; }
+    .lights i { position: relative; flex: none; width: .6rem; height: .9rem; margin: .9rem 1.3rem 0; border-radius: 45% 45% 50% 50%;
       background: var(--gold); box-shadow: 0 0 12px var(--gold); animation: twinkle 2.4s infinite; }
+    .lights i::before { content: ""; position: absolute; top: -4px; left: 50%; width: 5px; height: 5px; transform: translateX(-50%);
+      background: #7c869a; border-radius: 1px; }
     .lights i:nth-child(3n+1) { background: var(--red); box-shadow: 0 0 12px var(--red); animation-delay: 1.2s; }
     .lights i:nth-child(3n+2) { background: var(--teal); box-shadow: 0 0 12px var(--teal); animation-delay: .6s; }
     @keyframes twinkle { 50% { opacity: .35; } }
@@ -190,7 +191,7 @@
 
   <div class="snow" aria-hidden="true"></div>
   <div class="glitter" aria-hidden="true"></div>
-  <div class="lights" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="lights" aria-hidden="true"></div>
 
   <main>
     <div class="flakes" aria-hidden="true">
@@ -499,6 +500,15 @@
         }
       }
     });
+
+    // one bulb at the bottom of each loop of the wire
+    const lights = document.querySelector('.lights');
+    const loops = Math.ceil(innerWidth / 51.2) + 1;
+    for (let i = 0; i < loops; i++) {
+      const b = document.createElement('i');
+      b.style.animationDelay = `${-(i * 0.7) % 2.4}s`;
+      lights.appendChild(b);
+    }
 
     const glitter = document.querySelector('.glitter');
     for (let i = 0; i < 45; i++) {
